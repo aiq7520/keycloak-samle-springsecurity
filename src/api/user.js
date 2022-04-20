@@ -1,24 +1,25 @@
 import request from '@/utils/request'
-
+import qs from 'qs'
 export function login(data) {
   return request({
-    url: '/vue-admin-template/user/login',
+    headers: { 'content-type': 'application/x-www-form-urlencoded;charset=utf-8' },
+    url: '/login',
     method: 'post',
-    data
+    data: qs.stringify(data)
   })
 }
 
 export function getInfo(token) {
   return request({
-    url: '/vue-admin-template/user/info',
-    method: 'get',
-    params: { token }
+    url: '/user/info',
+    method: 'get'
+    // params: { token }
   })
 }
 
 export function logout() {
   return request({
-    url: '/vue-admin-template/user/logout',
+    url: '/logout',
     method: 'post'
   })
 }
