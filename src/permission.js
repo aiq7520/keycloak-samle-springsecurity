@@ -54,6 +54,7 @@ router.beforeEach(async(to, from, next) => {
     } else {
       // console.log(location.href, to.path)
       if (Cookies.get('saml-login')) {
+        //
         setToken('sssfdsfdsfs')
         next({ path: '/' })
       }

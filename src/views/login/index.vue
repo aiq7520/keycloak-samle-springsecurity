@@ -241,4 +241,8 @@ $light_gray:#eee;
     user-select: none;
   }
 }
+.el-link {
+  left: 50px;
+  top: 50px;
+}
 </style>
