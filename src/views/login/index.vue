@@ -1,5 +1,7 @@
 <template>
   <div class="login-container">
+
+    <el-link type="primary" @click="keycloak()">keycloak login</el-link>
     <el-form ref="loginForm" :model="loginForm" :rules="loginRules" class="login-form" auto-complete="on" label-position="left">
 
       <div class="title-container">
@@ -53,6 +55,7 @@
 </template>
 
 <script>
+import Cookies from 'js-cookie'
 
 export default {
   name: 'Login',
@@ -94,6 +97,11 @@ export default {
     }
   },
   methods: {
+    keycloak() {
+      // window.open(routeUrl.href, 'http://localhost:8081/saml/login?disco=true&idp=http://localhost:8080/realms/demo')
+      window.location.href = 'http://localhost:8081/saml/login?disco=true&idp=http://localhost:8080/realms/demo'
+      Cookies.set('saml-login', true)
+    },
     showPwd() {
       if (this.passwordType === 'password') {
         this.passwordType = ''

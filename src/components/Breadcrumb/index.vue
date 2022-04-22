@@ -2,7 +2,10 @@
   <el-breadcrumb class="app-breadcrumb" separator="/">
     <transition-group name="breadcrumb">
       <el-breadcrumb-item v-for="(item,index) in levelList" :key="item.path">
-        <span v-if="item.redirect==='noRedirect'||index==levelList.length-1" class="no-redirect">{{ item.meta.title }}</span>
+        <span v-if="item.redirect==='noRedirect'||index==levelList.length-1" class="no-redirect">{{ item.meta.title }}
+          <el-tag size="small">username:{{ name }}</el-tag>
+          <el-tag v-if="isSaml" size="small">SAML by keycloak login</el-tag>
+        </span>
         <a v-else @click.prevent="handleLink(item)">{{ item.meta.title }}</a>
       </el-breadcrumb-item>
     </transition-group>
@@ -11,11 +14,13 @@
 
 <script>
 import pathToRegexp from 'path-to-regexp'
-
+import Cookies from 'js-cookie'
 export default {
   data() {
     return {
-      levelList: null
+      levelList: null,
+      name: this.$store.state.user.name,
+      isSaml: Cookies.get('saml-login') !== 'false'
     }
   },
   watch: {
@@ -71,8 +76,11 @@ export default {
   margin-left: 8px;
 
   .no-redirect {
-    color: #97a8be;
+    color: #31363c;
     cursor: text;
   }
+}
+.el-tag{
+  margin-left: 30px;
 }
 </style>

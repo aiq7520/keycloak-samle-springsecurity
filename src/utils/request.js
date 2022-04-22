@@ -21,6 +21,7 @@ service.interceptors.request.use(
       // please modify it according to the actual situation
       config.headers['Authorization'] = getToken()
     }
+    console.log(process.env.VUE_APP_BASE_API + config.url)
     return config
   },
   error => {
